@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+  <html lang="ja">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>motanka</title>
+
+      <style>
+      @charset "UTF-8";
+      html {
+      orphans: 1;
+      widows: 1;
+      }
+
+      body{
+        writing-mode: vertical-rl;
+      }
+
+      * {
+      margin: 0;
+      padding: 0;
+      }
+
+      @page {
+        size: 148mm 210mm;
+        block-size: calc(3.5519999999999996mm * 1.75 * 20 + (3.5519999999999996mm * 0.4));
+        margin-top: 10%;
+        margin-bottom: 10%;
+        margin-left: 8%;
+        margin-right: 8%;
+        /* 以下、マージンボックスに継承される */
+        font-size: 6pt;
+        font-family: "游明朝", "YuMincho", serif;
+        /* 本来不要（<span class="smaller"><span class="smaller">ルート要素の指定が継承される</span></span>）だが、現時点のvivliostyle.jsの制限により必要 */
+        vertical-align: top;
+      }
+
+      @page : first {
+        counter-reset: page 0;
+      }
+
+      @page :left {
+        margin-right: 6%;
+        margin-left: 10%;
+        @bottom-left {
+          content: "motanka 20字×20行 "counter(page)"";
+          margin-left: 0mm;
+          margin-bottom: 5%;
+          writing-mode: horizontal-tb;
+          font-size:10q;
+          /* CSS仕様上は@pageルール内に書けばよいが、現時点のvivliostyle.jsの制限によりここに書く */
+      }
+    }
+      
+      @page :right {
+        margin-left: 6%;
+        margin-right: 10%;
+        /* border-bottom: 1pt solid black; */
+      /* 右下ノンブル */
+      @bottom-right {
+          content: "motanka 20字×20行 "counter(page)"";
+          margin-right: 0mm;
+          margin-bottom: 5%;
+          writing-mode: horizontal-tb;
+          font-size:10q;
+          /* CSS仕様上は@pageルール内に書けばよいが、現時点のvivliostyle.jsの制限によりここに書く */
+      }
+      }
+  
+      html {
+      font-family: "游明朝", "YuMincho", serif;
+      font-weight: Medium;
+      text-align: justify;
+      hanging-punctuation: allow-end;
+      text-spacing: none;
+      }
+  
+      body{
+        break-before: left;
+
+        column-count: 2;
+  column-fill: auto;
+      }
+  
+      div#draft{
+        inline-size: calc(71.03999999999999mm + 0.5em);
+        margin-inline-start: auto;
+        margin-inline-end: auto;
+      }
+
+      h1 {
+      /* フォント */
+      font-weight: Extrabold;
+      /* フォントサイズ */
+      font-size: 24q;
+      /* 字下げ */
+      text-indent: 0;
+      /* 直後の改ページ・改段禁止 */
+      page-break-before: always;
+      page-break-after: always;
+      line-height: 42q;
+      letter-spacing: 0.25em;
+      display: flex;
+      align-items: center;
+      }
+  
+      h2 {
+      /* フォント */
+      font-weight: Demibold;
+      /* フォントサイズ */
+      font-size: 16q;
+      /* 字下げ */
+      text-indent: 3em;
+      /* 直後の改ページ・改段禁止 */
+      page-break-before: always;
+      page-break-after: avoid;
+      line-height: 42q;
+      margin-left: 2em;
+      }
+  
+      h2.part {
+      block-size: 80mm;
+      padding: 0mm 35mm;
+      font-weight: bold;
+      font-size: 16q;
+      page-break-before: always;
+      page-break-after: always;
+      margin-block-end: 4em;
+      }
+  
+      h1 + h2 {
+      margin-block-start: 16pt;
+      }
+  
+      ruby > rt {
+      font-size: 6.5q;
+      }
+  
+      p {
+        font-size: 3.5519999999999996mm;
+        line-height: 1.75;
+        inline-size: calc(71.03999999999999mm + 0.5em);
+        text-indent: 0em;
+        hanging-punctuation: allow-end;
+        line-break:strict;
+        page-break-inside: auto;
+      }
+
+    div.indent-1 p:first-of-type, div.indent-2 p:first-of-type, div.indent-3 p:first-of-type{
+      padding-block-start: calc( 3.5519999999999996mm * 1.75);
+      }
+
+      div.indent-1 p:last-of-type, div.indent-2 p:last-of-type, div.indent-3 p:last-of-type{
+      padding-block-end: calc( 3.5519999999999996mm * 1.75);
+      }
+
+    
+    div.indent-1 p{
+    height: calc( calc(71.03999999999999mm + 0.5em) - 3.5519999999999996mm);
+    padding-inline-start: calc( 3.5519999999999996mm);
+    }
+
+    div.indent-2 p{
+    height: calc( calc(71.03999999999999mm + 0.5em) - (3.5519999999999996mm * 2));
+    padding-inline-start: calc(3.5519999999999996mm * 2);
+    }
+
+    div.indent-3 p{
+    height: calc( calc(71.03999999999999mm + 0.5em) - (3.5519999999999996mm * 3));
+    padding-inline-start: calc(3.5519999999999996mm * 3);
+    }
+
+    p.goth {
+    margin-inline-start: 3em;
+    font-family: "游ゴシック", "YuGothic", san-serif;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    }
+
+    p.align-rb {
+    text-align: end;
+    }
+
+    p.goth + p.goth {
+    margin-block-start: -1em;
+    }
+
+    div.codes {
+    display: inline-block;
+    margin: 3em 1em;
+    writing-mode: horizontal-tb;
+    padding: 1em;
+    font-family: "Courier", monospace;
+    font-size: 0.8em;
+    }
+  
+    div.codes p {
+    text-orientation: sideways;
+    }
+
+    p.star {
+    text-indent: 3em;
+    margin-right: 16pt;
+    margin-left: 16pt;
+    }
+
+    hr {
+    border: none;
+    border-right: 1pt solid black;
+    height: 6em;
+    margin: auto 8.5pt;
+    }
+
+    /* 縦中横 */
+    .tcy {
+    -webkit-text-combine: horizontal;
+    text-combine: horizontal;
+    -ms-text-combine-horizontal: all;
+    text-combine-horizontal: digit 2;
+    text-combine-upright: digit 2;
+    }
+
+    /* 圏点（<span class="smaller">ゴマ</span>） */
+    em.side-dot, em.sesame_dot {
+    font-style: normal;
+    -webkit-text-emphasis-style: sesame;
+    text-emphasis-style: sesame;
+    margin-block-start: -1em;
+    display: inline-block;
+    }
+
+    /*著作者*/
+    .author {
+    position: absolute;
+    bottom: 0;
+    font-size: 8.5pt;
+    margin-inline-start: 50pt;
+    letter-spacing: normal;
+    }
+
+    /*画像＋キャプション*/
+    figure {
+    display: block;
+    width: 236pt;
+    -ms-writing-mode: lr-tb;
+    -webkit-writing-mode: horizontal-tb;
+    writing-mode: horizontal-tb;
+    }
+
+    figure img {
+    width: 100%;
+    height: auto;
+    vertical-align: bottom;
+    }
+
+    figcaption {
+    text-align: start;
+    font-size: 7pt;
+    }
+
+    /*奥付*/
+    .colophon {
+    font-size: 7pt;
+    margin-right: 48pt;
+    }
+    /* 級さげ */
+    span.smaller{
+        font-size:6.5pt
+    }
+  
+    div.comment {
+        display:none;
+    }
+
+    p.blank {
+        color:transparent;
+    }
+
+    span.blank{
+      display:none;
+    }
+    </style>
+
+  </head>
+  <body>
+  <div id="draft">
+  <p id="l-0">【カリン】</p>
+  </div>
+  </body>
+  </html>
